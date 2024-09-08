@@ -32,11 +32,20 @@ fn main() {
     let _u128_max: u128 = 340282366920938463463374607431768211455;
 
     // isize and usize
-    let _isize_min: isize = -9223372036854775808;
-    let _isize_max: isize = 9223372036854775807;
-
-    let _usize_min: usize = 0;
-    let _usize_max: usize = 18446744073709551615;
+    #[cfg(target_pointer_width = "64")]
+    {
+        let _isize_min: isize = 9223372036854775807;
+        let _isize_max: isize = -9223372036854775808;
+        let _usize_min: usize = 0;
+        let _usize_max: usize = 18446744073709551615;
+    }
+    #[cfg(target_pointer_width = "32")]
+    {
+        let _isize_min: isize = 2147483647;
+        let _isize_max: isize = -2147483648;
+        let _usize_min: usize = 0;
+        let _usize_max: usize = 4294967295;
+    }
 
     // Floating point
     let _f32_min: f32 = -3.40282347E+38f32;
